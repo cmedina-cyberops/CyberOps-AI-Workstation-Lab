@@ -1,0 +1,124 @@
+# ==========================================================================
+# CyberOps & AI Workstation Lab - security-focused .gitignore
+# Purpose: keep secrets, credentials, personal data and machine-local state
+#          out of version control. Sanitized project source and docs are
+#          intentionally NOT ignored.
+# ==========================================================================
+
+# --- Cryptographic material / keys / certificates ---
+*.key
+*.pem
+*.pfx
+*.p12
+*.cer
+*.crt
+*.der
+*.jks
+*.keystore
+*.asc
+*.gpg
+id_rsa
+id_rsa.*
+id_ed25519
+id_ed25519.*
+*.ppk
+
+# --- Password managers / secret stores ---
+*.kdbx
+*.kdb
+*.opvault
+*.agilekeychain
+
+# --- Environment / secret / token files ---
+.env
+.env.*
+*.env
+*.token
+*.secret
+*.secrets
+secret
+secrets
+secrets.*
+credential
+credentials
+credentials.*
+credentials*
+secrets*
+*apikey*
+*api_key*
+*.apikey
+auth.json
+.netrc
+_netrc
+
+# --- BitLocker / recovery keys ---
+*BitLocker*Recovery*Key*
+*recovery-key*
+*recovery_key*
+
+# --- Machine / hardware reports that may contain identifiers ---
+battery-report-*.html
+battery-report*.html
+energy-report*.html
+*-systeminfo-*.txt
+*dxdiag*.txt
+msinfo32*.nfo
+
+# --- Personal backups / recovered data (do NOT track) ---
+Recovered-Desktop/
+Recovered-Desktop
+RecoveredDesktop/
+personal-backups/
+personal_backups/
+Backups/
+backup/
+backups/
+*.bak
+
+# --- Downloads / large or transient user content ---
+Downloads/
+downloads/
+
+# --- Temporary / log / cache files ---
+*.log
+*.tmp
+*.temp
+*.cache
+*.swp
+*.swo
+*~
+Thumbs.db
+desktop.ini
+.DS_Store
+tmp/
+temp/
+cache/
+.cache/
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+pip-log.txt
+
+# --- IDE / editor local state ---
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.sample.json
+.idea/
+*.code-workspace
+
+# --- OS / shell history that may leak commands or hosts ---
+.bash_history
+.python_history
+ConsoleHost_history.txt
+
+# --- Archives that are likely raw captures, not source ---
+SysinternalsSuite*.zip
+*.evtx
