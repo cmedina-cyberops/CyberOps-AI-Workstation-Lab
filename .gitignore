@@ -64,6 +64,17 @@ energy-report*.html
 *dxdiag*.txt
 msinfo32*.nfo
 
+# --- Internal working files: kept local, not part of the public portfolio ---
+# CLAUDE.md is the local AI-assistant operating agreement for this repo (its
+# substance is summarised in README "Security Approach"). BATCH_5x process /
+# publication logs are internal workflow records, not portfolio evidence.
+/CLAUDE.md
+BATCH_5B_RESULTS.md
+BATCH_5C_RESULTS.md
+BATCH_5D_RESULTS.md
+BATCH_5E_RESULTS.md
+BATCH_5F_RESULTS.md
+
 # --- Personal backups / recovered data (do NOT track) ---
 Recovered-Desktop/
 Recovered-Desktop

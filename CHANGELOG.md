@@ -8,6 +8,34 @@ This project does not yet use semantic version tags; entries are grouped by batc
 
 ---
 
+## [Batch 5F] – 2026-08-30 – Final public-readiness review
+
+### Changed
+- Full file-by-file portfolio review of the tracked repository (see `BATCH_5F_RESULTS.md`
+  for the classification and recommendations).
+- `CLAUDE.md` (the local AI-assistant operating agreement) removed from Git tracking and
+  added to `.gitignore`; the local file is retained. Its substance is covered by the
+  README "Security Approach" section.
+- `BATCH_5B_RESULTS.md` (an internal identifier-sanitization / git-hygiene log) removed
+  from Git tracking and kept local; `BATCH_5C/5D/5E/5F_RESULTS.md` added to `.gitignore`
+  so the internal batch logs stay local.
+- `BATCH_4_RESULTS.md`: the name of a specific educational institution replaced with the
+  generic "institutional Microsoft 365 entitlement" — no technical finding changed.
+- `README.md` / `PROJECT_STATE.md` updated to match the tracked file set.
+
+### Reviewed, no change
+- Commit history (`c4f4842`, `a513e23`): both commits sanitized, professional messages,
+  no sensitive material ever committed — kept as-is, no rewrite.
+- Full-tree privacy / secret scan: no credentials, tokens, keys, IPs, MACs, SSIDs,
+  serials, product/recovery keys, or personal paths. All `d.d.d.d` strings are software /
+  driver version numbers.
+- Repository visibility unchanged (**private**); no Pages, Actions, releases,
+  collaborators, branches, or tags.
+
+**Status: PASS.**
+
+---
+
 ## [Batch 5E] – 2026-08-30 – Repository hygiene + portfolio documentation
 
 ### Changed

@@ -96,10 +96,11 @@ Exact versions, publishers, and signatures are recorded in `SOFTWARE_PLAN.md` an
 | `SOFTWARE_PLAN.md` | Planned / installed / held software |
 | `RECOVERY_MEDIA_INVENTORY.md` | Recovery media tracking (sanitized) |
 | `BATCH_*_RESULTS.md` | Per-batch execution records: pre-check, commands, results, verification, verdict |
-| `CLAUDE.md` | Working agreement / guardrails for AI-assisted execution |
 
 Language directories currently hold `.gitkeep` placeholders; automation is added as
-batches produce it.
+batches produce it. Some internal working files (the AI-assistant operating agreement
+and workflow / publication logs) are kept local to the machine and are intentionally not
+part of this repository.
 
 ## Key Accomplishments
 

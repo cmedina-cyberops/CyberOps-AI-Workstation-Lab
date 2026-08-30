@@ -1,7 +1,7 @@
 # PROJECT_STATE.md
 
 Sanitized snapshot of the workstation's current state.
-**Last updated:** 2026-08-30 (Batch 5E — Remote Hygiene + Portfolio Review).
+**Last updated:** 2026-08-30 (Batch 5F — Final Public-Readiness Review).
 
 No machine identifiers (username, hostname, serial, IP/MAC, SSID, emails, keys) are
 included by design.
@@ -84,18 +84,21 @@ Exact versions, sources, signatures, and PATH changes: see `BATCH_5_RESULTS.md`.
 | Batch 5C | Privacy cleanup, branch `master → main`, repo-local Git identity, first local commit `c4f4842` | **PASS** |
 | Batch 5D | Private GitHub repository created; `origin` added; `main` pushed | **PASS** |
 | Batch 5E | Remote hygiene (Issues/Projects disabled) + portfolio documentation polish | **PASS** — see `BATCH_5E_RESULTS.md` |
+| Batch 5F | Final public-readiness review; internal files untracked; institution name redacted | **PASS** — see `BATCH_5F_RESULTS.md` |
 
 ## 7. Repository / publication state
 
 - Published to a GitHub repository that is and remains **PRIVATE**. Default branch
-  `main`; local `HEAD` synchronized with `origin/main` (`c4f4842`).
+  `main`; local `HEAD` synchronized with `origin/main`.
 - No extra branches or tags. No GitHub Actions workflows, Pages site, releases,
   collaborators, branch protection, or Actions secrets.
 - GitHub **Issues** and **Projects** are disabled (documentation/portfolio repository).
 - Making the repository public is a **future, separately-authorized** decision. See the
-  "remaining steps before public publication" section of `BATCH_5E_RESULTS.md`.
-- `BATCH_5C_RESULTS.md` and `BATCH_5D_RESULTS.md` are kept **local / untracked**
-  (workflow reports with limited portfolio value).
+  "remaining steps before public publication" section of `BATCH_5F_RESULTS.md`.
+- Kept **local only** (not tracked): `CLAUDE.md` (AI-assistant operating agreement),
+  `BATCH_5B_RESULTS.md`, `BATCH_5C_RESULTS.md`, `BATCH_5D_RESULTS.md`,
+  `BATCH_5E_RESULTS.md`, `BATCH_5F_RESULTS.md` — internal workflow / publication logs
+  with limited portfolio value.
 
 ## 8. Explicit HOLD items (require separate authorization)
 

@@ -2,8 +2,8 @@
 
 - **Date:** 2026-08-28
 - **Scope:** Install only approved essential software from official/trusted sources while preserving the clean Windows security baseline.
-- **Overall status:** **PARTIAL** — Installed & verified: KeePassXC, VLC, Adobe Acrobat Reader (64-bit), Google Drive for desktop. OneDrive already current (unchanged). **HELD:** Microsoft Office (awaiting Valencia College portal sign-in), Epson WF-2950 (deferred to Batch 4C until printer connected), Google Drive sign-in (awaiting interactive user login).
-- **Last updated:** 2026-08-28 — Batch 4B: Google Drive installed & verified (sign-in held); Office confirmed as Valencia College entitlement (held for portal sign-in); Epson deferred to Batch 4C. See section 9.
+- **Overall status:** **PARTIAL** — Installed & verified: KeePassXC, VLC, Adobe Acrobat Reader (64-bit), Google Drive for desktop. OneDrive already current (unchanged). **HELD:** Microsoft Office (awaiting institutional Microsoft 365 portal sign-in), Epson WF-2950 (deferred to Batch 4C until printer connected), Google Drive sign-in (awaiting interactive user login).
+- **Last updated:** 2026-08-28 — Batch 4B: Google Drive installed & verified (sign-in held); Office confirmed as an institutional Microsoft 365 entitlement (held for portal sign-in); Epson deferred to Batch 4C. See section 9.
 
 ---
 
@@ -148,14 +148,14 @@ No unexpected security prompts, no unsigned packages, no ambiguous product ident
 4. Optional: decide whether to keep the KeePassXC launch-at-startup entry.
 5. Optional: leave the Adobe Acrobat Update Service enabled (recommended for security patching).
 
-> **Note:** items 1–3 above were subsequently authorized/actioned in **Batch 4B** (section 9). Google Drive installed; Office held for Valencia College portal; Epson deferred to Batch 4C.
+> **Note:** items 1–3 above were subsequently authorized/actioned in **Batch 4B** (section 9). Google Drive installed; Office held for the institutional Microsoft 365 portal; Epson deferred to Batch 4C.
 
 ---
 
-## 9. Batch 4B — Google Drive + Valencia College Office
+## 9. Batch 4B — Google Drive + institutional Microsoft 365 Office
 
 - **Date:** 2026-08-28
-- **Authorization:** "Batch 4B — authorized pending essential software." Google Drive explicitly authorized; Office scoped to the Valencia College Microsoft 365 entitlement; Epson explicitly deferred to Batch 4C.
+- **Authorization:** "Batch 4B — authorized pending essential software." Google Drive explicitly authorized; Office scoped to an institutional Microsoft 365 entitlement; Epson explicitly deferred to Batch 4C.
 - **Not touched (already passed, per instruction):** KeePassXC, VLC, Adobe Acrobat Reader, OneDrive — no reinstall, no modification.
 
 ### 9.1 Google Drive for desktop — **PASS** (install) / **HOLD** (sign-in)
@@ -187,7 +187,7 @@ No other new services, tasks, or Run keys. No old Google Drive settings imported
 
 **HELD:** application is installed but **not signed in**. Per instruction, the interactive Google sign-in (and choice of **Stream files** vs Mirror — recommend **Stream files** initially) is left entirely to the user. No Google password or MFA code was requested, captured, logged, or handled.
 
-### 9.2 Microsoft Office (Valencia College entitlement) — **HOLD**
+### 9.2 Microsoft Office (institutional Microsoft 365 entitlement) — **HOLD**
 
 | Check | Result |
 |-------|--------|
@@ -195,7 +195,7 @@ No other new services, tasks, or Run keys. No old Google Drive settings imported
 | `WINWORD.EXE` under `Program Files\Microsoft Office\root\Office16` | **Not present** |
 | Any Office suite in uninstall registry | **None** (only the pre-installed Store "Office Hub" launcher stub) |
 
-- **No Office suite is installed.** **HOLD** for the user to sign in to the official **Valencia College / Microsoft 365 portal** (portal.office.com / Valencia's Office 365 ProPlus benefit) and start the Microsoft-provided "Install Office" desktop download from there.
+- **No Office suite is installed.** **HOLD** for the user to sign in to the official **institutional Microsoft 365 portal** (portal.office.com / the institution's Microsoft 365 Apps / Office 365 ProPlus benefit) and start the Microsoft-provided "Install Office" desktop download from there.
 - Not done and will not be done: purchasing/installing Office Home & Business 2024; KMS/activators/unofficial ISOs/volume-license workarounds/third-party installers; guessing the edition or licensing channel.
 - **After the portal install completes**, record here: exact edition (e.g. "Microsoft 365 Apps for enterprise"), architecture (32/64-bit), build/version, and activation/licensing channel (`Get-ItemProperty HKLM:\SOFTWARE\Microsoft\Office\ClickToRun\Configuration` + `cscript ospp.vbs /dstatus`). No credentials or MFA codes to be captured.
 
@@ -223,7 +223,7 @@ No Epson software or firmware installed or modified in this batch, per instructi
 |------|--------|
 | Google Drive — installation & verification | **PASS** |
 | Google Drive — interactive sign-in | **HOLD** (user action) |
-| Microsoft Office (Valencia College) | **HOLD** (awaiting portal sign-in / confirmation of official desktop install) |
+| Microsoft Office (institutional Microsoft 365) | **HOLD** (awaiting portal sign-in / confirmation of official desktop install) |
 | Epson WF-2950 | **HOLD** (Batch 4C) |
 | Security baseline (post-check) | **PASS** |
 | **Batch 4B overall** | **PARTIAL** — Google Drive PASS; Office & Epson HOLD; no FAIL |
