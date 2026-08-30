@@ -8,6 +8,81 @@ This project does not yet use semantic version tags; entries are grouped by batc
 
 ---
 
+## [Batch 5E] – 2026-08-30 – Repository hygiene + portfolio documentation
+
+### Changed
+- GitHub repository settings: **Issues** and **Projects** disabled (not needed for a
+  documentation / portfolio repository).
+- `README.md` restructured into a portfolio-oriented layout (Overview, Objectives,
+  Architecture, Security Approach, Current Status, Tooling, Project Structure, Key
+  Accomplishments, Planned Work, Safety / Ethics, Portfolio Disclaimer).
+- `PROJECT_STATE.md` updated to the verified current state, including the private
+  GitHub publication and batch status through 5E.
+- `SOFTWARE_PLAN.md` updated: GitHub CLI now authenticated; private remote published;
+  repository-local Git identity recorded.
+
+### Unchanged (explicitly out of scope)
+- Repository visibility (**still private**), default branch (`main`), GitHub Pages
+  (none), Actions (none), releases (none), collaborators (none), branch protection
+  (none), secrets (none), branches / tags (only `main`).
+
+**Status: PASS.**
+
+---
+
+## [Batch 5D] – 2026-08-30 – Private GitHub publication
+
+### Added
+- Created one **private** GitHub repository and added it as `origin`. The remote was
+  **not** initialized with a README, `.gitignore`, or license.
+- Pushed branch `main` only (commit `c4f4842`). No other branch or tag pushed.
+
+### Verified
+- Remote visibility **private**; default branch `main`; local `HEAD` = `origin/main`;
+  16 tracked files + 6 `.gitkeep` placeholders uploaded; no hardware reports, no
+  personal-backup folder, no secrets.
+- Pre-push privacy / secret scan: clean.
+
+**Status: PASS.**
+
+---
+
+## [Batch 5C] – 2026-08-30 – Privacy cleanup + first local commit
+
+### Changed
+- Completed identifier sanitization across the batch reports; re-ran the full
+  privacy / secret review (clean).
+- Renamed the working branch `master` → `main`.
+- Set a **repository-local** Git identity (GitHub no-reply address — no personal email,
+  username, or hostname). Global Git identity left unset.
+
+### Added
+- First local commit `c4f4842` — "Initial secure workstation lab baseline", 22 files.
+  Not amended; no remote contacted.
+
+**Status: PASS.**
+
+---
+
+## [Batch 5B] – 2026-08-28 – Identifier sanitization + privacy review
+
+### Changed
+- Replaced the remaining host / user token in `BATCH_1_RESULTS.md` and
+  `BATCH_2_RESULTS.md`, and a literal user path in `POST_CLEAN_WINDOWS_AUDIT.md`, with
+  `<HOST>` / `<user>` placeholders.
+
+### Verified
+- Repository-wide scan for emails, IPv4 / IPv6, MAC, SSID, serials, product / recovery
+  keys, BitLocker keys, passwords, API keys, tokens, private keys, `.env` / credential /
+  KeePass files, and personal-backup paths — none found. Every `d.d.d.d` match confirmed
+  to be a software / driver version number.
+- `.gitignore` confirmed to cover `Recovered-Desktop`, `.env`, `secrets*`, `*.kdbx`,
+  key / cert files, and hardware reports.
+
+**Status: PASS** (staging gated to Batch 5C).
+
+---
+
 ## [Batch 5] – 2026-08-28 – Engineering baseline
 
 ### Added

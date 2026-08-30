@@ -1,7 +1,7 @@
 # SOFTWARE_PLAN.md
 
 Planned, installed, and held software for the workstation. Sanitized.
-**Last updated:** 2026-08-28 (Batch 5).
+**Last updated:** 2026-08-30 (Batch 5E).
 
 Sourcing rules:
 - Official vendor sources, Microsoft Store, or trusted winget packages only.
@@ -22,7 +22,7 @@ Sourcing rules:
 | PowerShell 7 | 7.6.5 | winget `Microsoft.PowerShell` | Microsoft | MSIX, hash-verified |
 | Python | 3.13.15 (x64) | winget `Python.Python.3.13` | Python Software Foundation | Per-user; `pip` + `py` launcher included |
 | pip | 26.2.1 | bundled with Python | PSF/PyPA | No third-party packages installed yet |
-| GitHub CLI | 2.98.0 | winget `GitHub.cli` | GitHub, Inc. | Installed only; **not authenticated** |
+| GitHub CLI | 2.98.0 | winget `GitHub.cli` | GitHub, Inc. | Authenticated (Batch 5D); used to publish the private remote |
 | Sysinternals Suite | 2026.8.1.0 | Microsoft Store `9P7KNL5RWT25` | Microsoft Corporation | Store-signed; tools not auto-run |
 
 ## Installed — applications (earlier batches)
@@ -44,7 +44,7 @@ Sourcing rules:
 |---|---|
 | Microsoft Office | Institutional portal sign-in required (interactive) |
 | Epson WF-2950 printer software | Printer not yet connected (Batch 4C) |
-| GitHub authentication (`gh auth login`) + remote repo | Not authorized in Batch 5 |
+| Public GitHub release | Repository is published but **private**; switching to public is a separate future decision |
 | Python third-party packages | Deliberately deferred; install per-project in a venv when needed |
 
 ## Candidate future tooling (not yet authorized)
@@ -52,7 +52,7 @@ Sourcing rules:
 - Windows Terminal (if not already present via OS)
 - Wireshark (capture on owned/lab networks only)
 - A Python virtual-environment workflow (`python -m venv`) for project scripts
-- `git` global identity configuration for local commits (currently unset)
+- `git` global identity: intentionally still unset; a repository-local identity is set for this repo (Batch 5C)
 - Kali-side tooling tracked separately once Batch 3 boot work is resolved
 
 ## Explicitly excluded
