@@ -1,10 +1,12 @@
 # PRE_FIRMWARE_VALIDATION.md
 
-**Subject:** HP EliteBook 1050 G1 — read-only validation of pending Windows Update item
+**Subject:** HP business-class laptop (Q72 board) — read-only validation of pending Windows Update item
 `HP Inc. - Firmware - 1.29.1.0`
 **Date:** 2026-08-28
 **Scope:** READ ONLY. No firmware downloaded, staged, flashed, modified, or hidden. No update executed.
 **Classification of this task:** READ ONLY (diagnostic). Any subsequent install is **HIGH-RISK / BACKUP REQUIRED**.
+
+> **Point-in-time snapshot.** This document records a firmware/configuration state observed in August 2026. The lab evolves; current firmware levels and settings may differ. The marketing model name is generalized; the board code (`Q72`), firmware-package identifiers and exact BIOS / ME / CCG5 version numbers are **retained deliberately** — they are load-bearing for the version-to-version reasoning and the HOLD decision.
 
 ---
 
@@ -171,7 +173,7 @@ All staged artifacts are dated **2024-12-02** — the *previous* Windows install
 **Defer / HOLD.** This validation cannot show the update delivers anything newer than what is already running: BIOS is byte-for-byte the same published level (01.29.01 / 1.29.1.0), nothing is staged, HP publishes nothing newer, and the item carries no KB, no security-bulletin reference, and no HP change notes. That is not enough benefit to justify a HIGH-RISK firmware write on a machine that was just rebuilt for trust reasons.
 
 Hold unless/until **one** of these is true:
-- HP publishes a BIOS **> 01.29.01** for the EliteBook 1050 G1 (Q72), or
+- HP publishes a BIOS **> 01.29.01** for this model (Q72 board), or
 - HP's SoftPaq release notes for this firmware show a **newer Intel ME or CCG5 sub-version** than `12.0.95.2489` / the current PD level (i.e. a real security or functional fix), or
 - you deliberately choose to let WU reconcile its records with a same-version reflash, accepting the risk below.
 

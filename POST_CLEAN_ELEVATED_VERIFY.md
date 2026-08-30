@@ -6,6 +6,8 @@
 **Mode:** READ-ONLY. The script queried state only. It temporarily mounted the ESP as `S:` and unmounted it in the same step (no persisted change), and wrote one diagnostic file (`battery-report-<stamp>.html`) into the project folder. **No** configuration, registry, boot, firmware, service, account, partition, or security-setting changes were made.
 **Repair actions:** None. `DISM /Online /Cleanup-Image /CheckHealth` (flag-check only) and `sfc /verifyonly` were run — neither repairs anything. `RestoreHealth`, `ScanHealth`, and `sfc /scannow` were **not** run.
 
+> **Point-in-time snapshot.** This document records a security and configuration state observed in August 2026. The lab evolves; current settings may differ. Device model / component-brand strings are generalized to a hardware class; TPM, Secure Boot, BitLocker, boot-chain and DISM/SFC results are unchanged.
+
 ---
 
 ## 1. Results Summary
@@ -13,7 +15,7 @@
 | Appendix A check | Result | Audit item(s) closed |
 |---|---|---|
 | Secure Boot | **Disabled** — `Confirm-SecureBootUEFI = False` | H1 (confirmed) |
-| TPM | **TPM 2.0 present, ready, enabled, activated, owned**; Infineon (IFX); lockout count 0 | M7 (TPM half), §4 |
+| TPM | **TPM 2.0 present, ready, enabled, activated, owned** (discrete TPM); lockout count 0 | M7 (TPM half), §4 |
 | Boot entries | Windows Boot Manager + Windows 11 loader intact; **`kali` firmware entry present** (`\EFI\kali\grubx64.efi`); no unknown OS loaders | §4.1, §5.2, I5 |
 | Shared ESP `\EFI\` contents | Windows, HP firmware, and **`\EFI\kali\grubx64.efi` (152 KB)** all present; **no `shimx64.efi` under `\EFI\kali`** | §5.2, I5 |
 | Defender exclusions (authoritative) | **All empty** — no path / process / extension / IP exclusions; no CFA-allowed apps; no ASR rules | §6.3, §25 indicator #5 |
@@ -48,8 +50,7 @@ Secure Boot is **disabled** in firmware, confirming the non-elevated registry re
 | Field | Value |
 |---|---|
 | TpmPresent / TpmReady / TpmEnabled / TpmActivated / TpmOwned | **True / True / True / True / True** |
-| Manufacturer | `IFX` (Infineon) |
-| Manufacturer version | `7.63.3353.0` |
+| TPM type | discrete TPM (manufacturer / firmware version generalized) |
 | Lockout count | `0` |
 | Spec version | **2.0** (`2.0, 0, 1.16`) |
 
@@ -63,7 +64,7 @@ TPM 2.0 is present and fully ready. This underpins BitLocker and measured boot a
 |---|---|---|
 | 1 | `{a7591db7-…}` | **`kali`** → `\EFI\kali\grubx64.efi` |
 | 2 | `{bootmgr}` | **Windows Boot Manager** → `\EFI\Microsoft\Boot\bootmgfw.efi` (partition = ESP / HarddiskVolume1) |
-| 3–8 | misc device, Kingston USB `<redacted>`, two "Generic USB Storage `<redacted>`", `Network Boot IPV4`, `Network Boot IPV6` | Removable / PXE — benign |
+| 3–8 | misc device, USB flash drive `<redacted>`, two "Generic USB Storage `<redacted>`", `Network Boot IPV4`, `Network Boot IPV6` | Removable / PXE — benign |
 
 **Windows Boot Manager (`{bootmgr}`):** `default = {current}`, `displayorder = {current}` only, `timeout 30`, `toolsdisplayorder = {memdiag}`.
 
@@ -82,10 +83,10 @@ Mounted read-only as `S:`, enumerated, unmounted. Key entries:
 | **`\EFI\kali\grubx64.efi`** | **155,648** | **Kali GRUB loader — PRESENT** |
 | `\EFI\Microsoft\Boot\CIPolicies\Active\*.cip` | 4 files | WDAC / Code-Integrity policies — normal on Win11 25H2 |
 | `\EFI\Microsoft\Boot\SecureBootRecovery.efi` | 174,584 | Standard MS Secure Boot recovery loader |
-| `\EFI\HP\BIOS\Current\Q72_012901.bin` | 16,777,216 | Currently-installed HP BIOS image (`01.29.01`) |
-| `\EFI\HP\BIOS\Previous\Q72_012800.bin` | 16,777,216 | Prior HP BIOS image (`01.28.00`) |
+| `\EFI\HP\BIOS\Current\<vendor-BIOS>.bin` | 16,777,216 | Currently-installed vendor BIOS image (current level) |
+| `\EFI\HP\BIOS\Previous\<vendor-BIOS>.bin` | 16,777,216 | Prior vendor BIOS image (rollback) |
 | `\EFI\HP\BIOS\New\` | *(empty)* | **No BIOS flash staged** |
-| `\EFI\HP\DEVFW\ME.bin`, `CCG5.bin` | 12.2 MB / 132 KB | HP-staged Intel ME + USB-C controller firmware images |
+| `\EFI\HP\DEVFW\ME.bin`, `CCG5.bin` | 12.2 MB / 132 KB | Vendor-staged Intel ME + USB-C controller firmware images |
 
 **Kali dual-boot verdict:** both the GRUB EFI loader (`\EFI\kali\grubx64.efi`) and the UEFI/NVRAM `kali` boot entry (§2.3) are intact. The audit's one real open question — "did the clean install drop the Kali boot path?" — is answered: **no, Kali is bootable.**
 
@@ -229,6 +230,6 @@ Full verification pass, 0–100%, no repairs performed. System files intact.
 
 ## Appendix — Data Handling
 
-Sanitized before saving. Deliberately excluded / genericised: host name(s) (`<HOSTNAME>`, `<HOSTNAME-PRIOR>`), the primary account login name (`<USER>`), removable-device serial strings (`<redacted>`), and volume path GUIDs where not needed. BCD entry GUIDs, firmware image file names/sizes, TPM manufacturer version, and SSD temperature/wear are retained as non-sensitive technical evidence. No passwords, tokens, keys, recovery keys, or personal file contents were accessed or recorded.
+Sanitized before saving. Deliberately excluded / genericised: host name(s) (`<HOSTNAME>`, `<HOSTNAME-PRIOR>`), the primary account login name (`<USER>`), removable-device serial strings (`<redacted>`), and volume path GUIDs where not needed. BCD entry GUIDs and SSD temperature/wear are retained as non-sensitive technical evidence. In a later pass, the exact device model, TPM manufacturer / firmware version and version-bearing BIOS image file names were **generalized to a hardware class** to reduce device fingerprinting; boot-chain structure, sizes, TPM 2.0 state, Secure Boot / BitLocker state and DISM/SFC results are unchanged. No passwords, tokens, keys, recovery keys, or personal file contents were accessed or recorded.
 
 *End of verification report.*

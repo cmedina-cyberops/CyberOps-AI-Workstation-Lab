@@ -5,6 +5,8 @@
 **Mode:** READ-ONLY. No configuration, registry, partition, boot, firmware, service, or account changes were made.
 **Collector context:** Non-elevated PowerShell session. Items requiring administrative rights are explicitly marked **[NEEDS ELEVATION]** and are consolidated into the verification script in Appendix A.
 
+> **Point-in-time snapshot.** This document records a security and configuration state observed in August 2026. The lab evolves; current settings may differ. Specific device model / component-brand strings have been generalized to a hardware class; capability and capacity detail is retained.
+
 ### Legend
 
 **Severity:** Critical / High / Medium / Low / Informational
@@ -71,7 +73,7 @@ Low / Informational items are in the body and Section 25.
 
 | Property | Value | Evidence |
 |----------|-------|----------|
-| Manufacturer / model | HP EliteBook 1050 G1 | [VERIFIED] |
+| Manufacturer / model | HP EliteBook-class business laptop | [VERIFIED] |
 | Chassis type | Mobile / laptop | [VERIFIED] |
 | Domain membership | Not domain-joined; WORKGROUP | [VERIFIED] |
 
@@ -79,7 +81,7 @@ Low / Informational items are in the body and Section 25.
 
 | Property | Value | Evidence |
 |----------|-------|----------|
-| Model | Intel Core i7-8850H @ 2.60 GHz (Coffee Lake-H, 8th gen) | [VERIFIED] |
+| Model | Intel 6-core / 12-thread mobile CPU | [VERIFIED] |
 | Cores / threads | 6 physical / 12 logical | [VERIFIED] |
 | Max clock (rated) | 2592 MHz base | [VERIFIED] |
 
@@ -90,14 +92,14 @@ Low / Informational items are in the body and Section 25.
 | Total installed | 32 GB (2 × 16 GB) | [VERIFIED] |
 | Total visible to OS | ~31.8 GB (remainder reserved for iGPU/hardware) | [VERIFIED] |
 | Type / speed | DDR4, 2667 MT/s configured (running at rated speed) | [VERIFIED] |
-| Modules | 2 × 16 GB, SK Hynix, both bottom slots populated | [VERIFIED] |
+| Modules | 2 × 16 GB DDR4, both bottom slots populated | [VERIFIED] |
 
 ### 3.4 GPU
 
 | Adapter | Driver version | Driver date | Status | Evidence |
 |---------|----------------|-------------|--------|----------|
-| NVIDIA GeForce GTX 1050 with Max-Q Design (4 GB) | 32.0.15.7371 (branded "573.71") | 2025-08-20 | OK | [VERIFIED] |
-| Intel UHD Graphics 630 (iGPU) | 31.0.101.2140 | 2025-11-04 | OK | [VERIFIED] |
+| Discrete NVIDIA GPU (4 GB) | 32.0.15.7371 (branded "573.71") | 2025-08-20 | OK | [VERIFIED] |
+| Integrated Intel graphics (iGPU) | 31.0.101.2140 | 2025-11-04 | OK | [VERIFIED] |
 
 **[INFERENCE]:** Both display drivers are relatively current (NVIDIA ~1 major branch behind latest; Intel recent). Not a security concern; optional refresh only.
 
@@ -105,12 +107,12 @@ Low / Informational items are in the body and Section 25.
 
 | Property | Value | Evidence |
 |----------|-------|----------|
-| System drive | "SPCC M.2 PCIe SSD", NVMe, ~931.5 GB, GPT, **HealthStatus: Healthy / OK** | [VERIFIED] |
+| System drive | ~1 TB NVMe SSD (value-tier), ~931.5 GB usable, GPT, **HealthStatus: Healthy / OK** | [VERIFIED] |
 | Windows volume `C:` | NTFS, ~837.9 GB, ~783 GB free (~93% free) | [VERIFIED] |
-| Removable | Kingston DataTraveler USB, ~14.7 GB, FAT32, label `ESD-USB` (a Windows installation USB) | [VERIFIED] |
+| Removable | USB flash drive, ~14.7 GB, FAT32, label `ESD-USB` (a Windows installation USB) | [VERIFIED] |
 | SMART detail (wear %, power-on hours, temperature, reallocated sectors) | **Not captured** — `Get-StorageReliabilityCounter` returned no data unprivileged | **[NEEDS ELEVATION]** |
 
-**[INFERENCE]:** High-level health is good and free space is ample. Detailed NVMe endurance/wear data should be pulled in an elevated pass (Appendix A) to establish a baseline for this SSD (SPCC/SP is a value-tier brand; worth tracking wear).
+**[INFERENCE]:** High-level health is good and free space is ample. Detailed NVMe endurance/wear data should be pulled in an elevated pass (Appendix A) to establish a baseline for this SSD (a value-tier NVMe drive; worth tracking wear).
 
 ### 3.6 Battery
 
@@ -127,8 +129,8 @@ Low / Informational items are in the body and Section 25.
 | Property | Value | Evidence |
 |----------|-------|----------|
 | Firmware type | **UEFI** (confirmed via `BiosFirmwareType` and environment) | [VERIFIED] |
-| BIOS build | HP `Q72 Ver. 01.29.01` | [VERIFIED] |
-| BIOS release date | 2024-09-23 | [VERIFIED] |
+| BIOS/UEFI firmware | current vendor BIOS/UEFI firmware; version verified (see `PRE_FIRMWARE_VALIDATION.md` for the exact level and firmware-package analysis) | [VERIFIED] |
+| BIOS release date | 2024 vendor release | [VERIFIED] |
 | **Secure Boot** | **DISABLED** — `HKLM\SYSTEM\CurrentControlSet\Control\SecureBoot\State\UEFISecureBootEnabled = 0` | [VERIFIED] — see finding **H1** |
 | TPM present (detail) | Detailed `Get-Tpm` fields returned blank unprivileged; TPM chip is present in this platform and HVCI is running (which requires TPM-backed measured boot on this hardware class) | [INFERENCE] / **[NEEDS ELEVATION]** — see finding **M7** |
 | Firmware boot entries / UEFI boot order | `bcdedit /enum firmware` — **Access denied** unprivileged | **[NEEDS ELEVATION]** — see Section 4.1 & finding H1/Section 4 |
@@ -153,7 +155,7 @@ Low / Informational items are in the body and Section 25.
 | 4 | Windows Recovery | ~0.84 GB | (none) | WinRE partition | [VERIFIED] |
 | 5 | **Linux filesystem data** | **~92.13 GB** | (none) | **Kali Linux root — PRESENT and INTACT** | [VERIFIED] |
 
-- Removable Disk 1 (Kingston USB): MBR, FAT32, `D:` `ESD-USB` — a Windows installer stick, unrelated to dual boot.
+- Removable Disk 1 (USB flash drive): MBR, FAT32, `D:` `ESD-USB` — a Windows installer stick, unrelated to dual boot.
 - Two "Generic MassStorageClass" entries with **No Media** (empty multi-slot USB card reader) — not relevant.
 
 ### 5.2 Kali / GRUB integrity
@@ -300,8 +302,8 @@ Low / Informational items are in the body and Section 25.
 |--------|----------------|-------------|------------------------|
 | Intel Wireless-AC 9560 160MHz (Wi-Fi) | **21.80.2.3** | **2018-07-28** | **Very old Windows inbox driver.** Update 22.250.1.2 is pending. Correlates with 10× adapter-error events in 7 days (Section 23). Finding **M1**. |
 | Intel Wireless Bluetooth | 21.110.0.3 | 2020-06-24 | Old; refresh with the Intel Wi-Fi/BT bundle |
-| NVIDIA GeForce GTX 1050 Max-Q | 32.0.15.7371 | 2025-08-20 | Current-ish (installed package "573.71") |
-| Intel UHD Graphics 630 | 31.0.101.2140 | 2025-11-04 | Recent |
+| Discrete NVIDIA GPU | 32.0.15.7371 | 2025-08-20 | Current-ish (installed package "573.71") |
+| Integrated Intel graphics | 31.0.101.2140 | 2025-11-04 | Recent |
 | Intel Management Engine Interface | 2452.7.1.0 | 2024-12-21 | Present but see failed "PCI Device" entries above |
 | Intel 300-Series SATA AHCI controller | 17.11.0.1000 | 2021-09-29 | Fine (no SATA drives, NVMe in use) |
 | Synaptics touchpad / fingerprint | 19.5.9.50 / 5.5.27.1099 | 2021 / 2020 | Fingerprint update 5.5.28.1099 pending |
@@ -313,7 +315,7 @@ Low / Informational items are in the body and Section 25.
 ### 10.3 HP drivers / firmware
 
 - HP function drivers (hotkeys, WLAN switching, drive-protection sensor) are present via Windows Update. [VERIFIED]
-- HP **firmware 1.29.1.0** is pending (Section 8). Installed BIOS is `01.29.01` — the pending item may be a sub-component (e.g. ME firmware, EC, retimer) rather than the main BIOS. Confirm against HP's support page for the EliteBook 1050 G1. [INFERENCE] — finding **H3 / L5**.
+- The vendor **firmware update "HP Inc. – Firmware – 1.29.1.0"** is pending (Section 8). It matches the currently-running BIOS level — the pending item may be a sub-component (e.g. ME firmware, EC, retimer) rather than the main BIOS. Confirm against the vendor's support page for this model. [INFERENCE] — finding **H3 / L5**. (Full analysis in `PRE_FIRMWARE_VALIDATION.md`.)
 - No HP bloatware suite (HP Support Assistant, HP Wolf, etc.) is installed. [VERIFIED]
 
 ---
@@ -365,7 +367,7 @@ Low / Informational items are in the body and Section 25.
 
 | Name | Version | Publisher | Installed |
 |------|---------|-----------|-----------|
-| Bang & Olufsen Audio | 9.0.278.150 | Conexant (HP OEM audio) | (with OS) |
+| Bang & Olufsen Audio | 9.0.278.150 | OEM audio driver | (with OS) |
 | Claude Code | 2.1.248 | Anthropic PBC | 2026-08-27 |
 | Git | 2.55.0.3 | Git Development Community | 2026-08-27 |
 | Microsoft Edge + WebView2 Runtime | 151.0.4129.107 | Microsoft | 2026-08-27 |
@@ -646,7 +648,7 @@ All indicators supplied for this audit were checked **read-only**. Result: **ALL
 | L2 | Delivery Optimization = LAN peer mode | Restricting to HTTP-only reduces LAN peer exposure on untrusted networks | Slightly higher WAN bandwidth for updates | Set DO `DownloadMode` back to `LAN`/default | LOW-RISK CHANGE |
 | L3 | 24× stuck Widgets/`WebExperience` update failures (`0x80073D02`) | Stops recurring error-log noise; healthy component servicing | Minimal; may require re-registering or removing the Widgets package | Reinstall the package from Store | LOW-RISK CHANGE |
 | L4 | Wi-Fi network category = Public | (No change recommended — this is the safer setting) | — | Set-NetConnectionProfile -NetworkCategory Private | LOW-RISK CHANGE |
-| L5 | Confirm whether a newer HP BIOS than `01.29.01` exists | Latest platform security fixes | See H3 | See H3 | HIGH-RISK / BACKUP REQUIRED |
+| L5 | Confirm whether a newer vendor BIOS than the current level exists | Latest platform security fixes | See H3 | See H3 | HIGH-RISK / BACKUP REQUIRED |
 | L6 | Optional-features inventory not captured | Verify no legacy/insecure feature (Telnet, TFTP, SMB1, etc.) is enabled | — (read-only) | — | READ-ONLY (Appendix A) |
 | L7 | WinRE state unverified | Ensure recovery environment is present & healthy | — (read-only) | — | READ-ONLY (Appendix A) |
 
@@ -670,7 +672,7 @@ All indicators supplied for this audit were checked **read-only**. Result: **ALL
 | 1.1 | Run the elevated **read-only** verification script (Appendix A): Secure Boot, TPM 2.0 state, `bcdedit` boot entries + default + timeout, ESP `\EFI\` contents (Kali/GRUB), Defender exclusions (authoritative), optional features & capabilities, `reagentc /info`, `vssadmin` protection, NVMe SMART, battery report, `winrm`/OpenSSH-Server state, `DISM /CheckHealth`, `sfc /verifyonly`, Security event log (4720/4726/4732/1102/4624 type 10). | H1 verify, M7, L6, L7, I3, I4, I5, §4.1, §5.2, §6.3, §19–23, §25(#5) | **READ-ONLY** |
 | 1.2 | Enable System Restore on `C:` and create a restore point labelled "post-clean baseline". | M5 | LOW-RISK CHANGE |
 | 1.3 | Run `Start-MpScan -ScanType FullScan`; review results. | M6 | READ-ONLY |
-| 1.4 | Apply the pending **driver** updates: Intel chipset / ME / DPTF / GNA, Intel Wi-Fi 22.250.1.2, Realtek media, Synaptics fingerprint — preferably from HP's official driver pack for EliteBook 1050 G1, then Windows Update for the rest. Reboot; re-check Device Manager. | M1, M2, part of H3 | LOW-RISK CHANGE |
+| 1.4 | Apply the pending **driver** updates: Intel chipset / ME / DPTF / GNA, Intel Wi-Fi 22.250.1.2, Realtek media, Synaptics fingerprint — preferably from the vendor's official driver pack for this model, then Windows Update for the rest. Reboot; re-check Device Manager. | M1, M2, part of H3 | LOW-RISK CHANGE |
 | 1.5 | Apply the pending **Defender platform** update (KB4052623) and the re-offered quality update; update App Installer + Windows Terminal via winget. | §9 | LOW-RISK CHANGE |
 | 1.6 | Investigate/clear the stuck Widgets (`WebExperience`) update. | L3 | LOW-RISK CHANGE |
 
@@ -784,5 +786,7 @@ sfc /verifyonly
 ## Appendix B — Data Handling
 
 This report was sanitized before saving. The following were **collected during the audit but deliberately excluded** from this document: machine hostname, the primary account's login name and SID, Wi-Fi SSID, all MAC addresses, all IPv4/IPv6 addresses and the DNS server address, disk/BIOS serial numbers, and the product key / activation ID. No passwords, tokens, keys, or personal file contents were accessed or recorded. Where a value was needed for context it is shown generically (e.g. `<USER>`, `<HOSTNAME>`, "external(redacted)").
+
+In a later pass, specific device model, CPU model, RAM/SSD brand and exact BIOS build strings were **generalized to a hardware class** (e.g. "HP EliteBook-class business laptop", "Intel 6-core / 12-thread mobile CPU", "~1 TB NVMe SSD") to reduce device fingerprinting. Capability, capacity, driver-version and security-posture detail is unchanged. The exact BIOS level and full firmware-package analysis remain in `PRE_FIRMWARE_VALIDATION.md`, where they are load-bearing for the HOLD decision.
 
 *End of report.*
