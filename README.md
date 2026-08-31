@@ -64,8 +64,8 @@ Summary as of the latest batch — full detail in `PROJECT_STATE.md`:
 - Security-hardening batch: **PASS**. Engineering-baseline batch: **PASS**.
 - Firmware update + Secure Boot re-enablement: **HOLD** (high-risk, backup required).
 - Personal-data recovery review: **HOLD** pending a cloud copy completing.
-- This repository is published as a **private** GitHub repository and is being prepared
-  for possible future public portfolio use.
+- This repository is published as a **public** GitHub repository, sanitized and
+  privacy-reviewed for portfolio use.
 
 ## Tooling
 
