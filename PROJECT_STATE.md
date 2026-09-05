@@ -1,7 +1,7 @@
 # PROJECT_STATE.md
 
 Sanitized snapshot of the workstation's current state.
-**Last updated:** 2026-08-30 (Batch 5F — Final Public-Readiness Review).
+**Last updated:** 2026-09-05 (Batch 5J — Published documentation refresh, first public script, MIT license).
 
 No machine identifiers (username, hostname, serial, IP/MAC, SSID, emails, keys) are
 included by design.
@@ -46,12 +46,14 @@ included by design.
 
 ## 4. Backup restoration
 
-- Personal data is being restored **selectively** from cloud backup.
-- A `Recovered-Desktop` copy is **still in progress** (copying from cloud storage).
-- Until that copy completes it is treated as **off-limits**: not scanned, enumerated,
-  moved, renamed, reorganized, or deleted. No custom antivirus scan is run against it yet.
+- Personal data was restored **selectively** from cloud backup.
+- The `Recovered-Desktop` review is **complete** (Batch 4C / 4C-3 / 4C-4): the tree was
+  verified read-only, install-media / cracked-software artifacts were isolated and then
+  permanently disposed of, and personal documents were left untouched. Details in the
+  local `BATCH_4C*` reports.
 - Old backups are treated as **data sources only**, reviewed before any use.
-- File-recovery follow-up work (Batch 4C) is **on HOLD** pending copy completion.
+- A cloud copy of the original recovered folder is retained in personal cloud storage
+  (outside this repository).
 
 ## 5. Engineering toolchain (Batch 5)
 
@@ -59,11 +61,11 @@ included by design.
 |---|---|
 | Git | Installed, current |
 | Visual Studio Code | Installed, current |
-| Claude Code CLI | Installed, current |
+| Claude Code CLI | Installed, current — verified installed version 2.1.258; `winget` reports no newer version available |
 | Windows PowerShell 5.1 | Present (system component, preserved) |
 | PowerShell 7 | Installed alongside 5.1 |
 | Python 3.13 (x64, PSF) | Installed, with `pip` and `py` launcher (per-user) |
-| GitHub CLI | Installed and **authenticated** (personal GitHub account); used to publish the private remote in Batch 5D |
+| GitHub CLI | Installed and **authenticated** (personal GitHub account); used to publish the remote in Batch 5D (repository later switched to **public** in Batch 5H) |
 | Sysinternals Suite | Installed from official Microsoft source |
 | Git identity | Repository-local only (GitHub no-reply address). Global Git identity left unset by choice. |
 
@@ -85,25 +87,57 @@ Exact versions, sources, signatures, and PATH changes: see `BATCH_5_RESULTS.md`.
 | Batch 5D | Private GitHub repository created; `origin` added; `main` pushed | **PASS** |
 | Batch 5E | Remote hygiene (Issues/Projects disabled) + portfolio documentation polish | **PASS** — see `BATCH_5E_RESULTS.md` |
 | Batch 5F | Final public-readiness review; internal files untracked; institution name redacted | **PASS** — see `BATCH_5F_RESULTS.md` |
+| Batch 5G | Hardware-fingerprint trim in the public-candidate audit docs | **PASS** (local report) |
+| Batch 5H | Repository switched **PRIVATE → PUBLIC**; final verification | **PASS** (local report) |
+| Batch 4C / 4C-3 / 4C-4 | `Recovered-Desktop` verification, selective cleanup, quarantine disposal | **PASS** — recovery review complete (local reports) |
+| Batch 6A | Cybersecurity-lab discovery + architecture baseline (read-only) | **PASS** (local report) |
+| Batch 6B (1–4) | Virtualization enablement; Kali-Lab VM; persistent isolated lab networking; baseline checkpoints; safe disk cleanup | **PASS** (local reports) |
+
+Batch reports 5G onward, and 4C onward, are kept **local / untracked** — internal
+execution logs, not portfolio evidence.
 
 ## 7. Repository / publication state
 
-- Published to a GitHub repository that is and remains **PRIVATE**. Default branch
+- GitHub repository is **PUBLIC** (switched from private in Batch 5H). Default branch
   `main`; local `HEAD` synchronized with `origin/main`.
+- The public repository is **sanitized and curated**: only privacy-reviewed documentation
+  and code is tracked. Internal / raw batch reports and machine-local state stay local
+  and are git-excluded.
 - No extra branches or tags. No GitHub Actions workflows, Pages site, releases,
   collaborators, branch protection, or Actions secrets.
 - GitHub **Issues** and **Projects** are disabled (documentation/portfolio repository).
-- Making the repository public is a **future, separately-authorized** decision. See the
-  "remaining steps before public publication" section of `BATCH_5F_RESULTS.md`.
-- Kept **local only** (not tracked): `CLAUDE.md` (AI-assistant operating agreement),
-  `BATCH_5B_RESULTS.md`, `BATCH_5C_RESULTS.md`, `BATCH_5D_RESULTS.md`,
-  `BATCH_5E_RESULTS.md`, `BATCH_5F_RESULTS.md` — internal workflow / publication logs
-  with limited portfolio value.
+- Licensed under the **MIT License** (`LICENSE`, copyright holder `cmedina-cyberops`).
+- First public automation published: `powershell/Backup-BraveBookmarks.ps1`.
+- Kept **local only** (not tracked): `CLAUDE.md` (AI-assistant operating agreement);
+  `docs/ORGANIZACION_DIGITAL.md` (local organizational manual); the internal batch logs
+  `BATCH_4C*`, `BATCH_5B`–`5H`, `BATCH_6A`, `BATCH_6B1`–`6B4`, `BRAVE_BOOKMARK_BACKUP_RESULTS.md`,
+  `RECOVERED_DESKTOP_CURRENT_STATE.md`, and machine / hardware reports — internal workflow
+  records with limited portfolio value.
 
 ## 8. Explicit HOLD items (require separate authorization)
 
 - **Batch 3:** vendor firmware/BIOS update and Secure Boot re-enablement (+ any
   matching Kali boot reconfiguration). High-risk / backup required.
-- **Batch 4C:** review and selective recovery from `Recovered-Desktop` once copying completes.
 - **Microsoft Office:** install via the institutional portal after interactive sign-in.
-- **Public release:** switching repository visibility to public is not authorized yet.
+
+## 9. Organizational manual (LOCAL note)
+
+`docs/ORGANIZACION_DIGITAL.md` (kept **local / private**) is the organizational source of
+truth for workstation, browser, lab, backup, and AI-workflow structure. Meaningful
+organizational changes should update this manual as part of the same change/batch.
+
+## 10. Recent milestones
+
+- **Chrome profile organization — COMPLETE.** Two primary profiles, `Personal-Study` and
+  `Work-CyberOps`, operationally separated. Detail in `docs/ORGANIZACION_DIGITAL.md` §4.
+- **Brave bookmarks backup automation — COMPLETE.** `powershell/Backup-BraveBookmarks.ps1`
+  performs a bookmarks-only, SHA256-verified copy to a Google Drive destination; first run
+  **PASS**. Bookmarks files only — no passwords, cookies, history, sessions, tokens, or
+  other sensitive browser databases.
+- **Claude Code maintenance — COMPLETE.** Verified installed version 2.1.258; `winget`
+  reports no newer version available.
+- **Epson WF-2950 print + scan — operational.**
+- **Cisco Packet Tracer — installed** (network-lab / study use).
+- **Batch 6B-4 — PASS.** Kali-Lab on a persistent `Lab-NAT` address; `Lab-Isolated`
+  reserved and isolated; `Baseline-Clean` checkpoint retained; `Baseline-Networked`
+  checkpoint created; verified-redundant Kali source files cleaned up safely.

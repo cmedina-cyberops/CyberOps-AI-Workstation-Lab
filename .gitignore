@@ -66,14 +66,27 @@ msinfo32*.nfo
 
 # --- Internal working files: kept local, not part of the public portfolio ---
 # CLAUDE.md is the local AI-assistant operating agreement for this repo (its
-# substance is summarised in README "Security Approach"). BATCH_5x process /
-# publication logs are internal workflow records, not portfolio evidence.
+# substance is summarised in README "Security Approach"). The local organizational
+# manual and the raw per-batch execution logs are internal workflow records, not
+# portfolio evidence.
+#
+# Batch reports 1, 2, 4, 4D and 5 were curated, privacy-reviewed and published
+# earlier; they stay tracked via the negation lines below. EVERY other
+# BATCH_*_RESULTS.md is treated as an internal log and kept local. Note: git
+# ignore rules never remove an already-tracked file, so the negations only need to
+# cover reports that are currently tracked.
 /CLAUDE.md
-BATCH_5B_RESULTS.md
-BATCH_5C_RESULTS.md
-BATCH_5D_RESULTS.md
-BATCH_5E_RESULTS.md
-BATCH_5F_RESULTS.md
+/docs/ORGANIZACION_DIGITAL.md
+RECOVERED_DESKTOP_CURRENT_STATE.md
+BRAVE_BOOKMARK_BACKUP_RESULTS.md
+EPSON_WF2950_SETUP_RESULTS.md
+
+BATCH_*_RESULTS.md
+!BATCH_1_RESULTS.md
+!BATCH_2_RESULTS.md
+!BATCH_4_RESULTS.md
+!BATCH_4D_RESULTS.md
+!BATCH_5_RESULTS.md
 
 # --- Personal backups / recovered data (do NOT track) ---
 Recovered-Desktop/

@@ -17,12 +17,12 @@ Sourcing rules:
 |---|---|---|---|---|
 | Git | 2.55.0.windows.3 | pre-existing | The Git Development Community | Current; not reinstalled |
 | Visual Studio Code | 1.135.0 | pre-existing | Microsoft | Current; not reinstalled |
-| Claude Code CLI | 2.1.248 | winget `Anthropic.ClaudeCode` | Anthropic PBC | Current |
+| Claude Code CLI | 2.1.258 | winget `Anthropic.ClaudeCode` | Anthropic PBC | Current; `winget` reports no newer version available |
 | Windows PowerShell | 5.1.26100.9168 | OS component | Microsoft | Preserved; not replaced |
 | PowerShell 7 | 7.6.5 | winget `Microsoft.PowerShell` | Microsoft | MSIX, hash-verified |
 | Python | 3.13.15 (x64) | winget `Python.Python.3.13` | Python Software Foundation | Per-user; `pip` + `py` launcher included |
 | pip | 26.2.1 | bundled with Python | PSF/PyPA | No third-party packages installed yet |
-| GitHub CLI | 2.98.0 | winget `GitHub.cli` | GitHub, Inc. | Authenticated (Batch 5D); used to publish the private remote |
+| GitHub CLI | 2.98.0 | winget `GitHub.cli` | GitHub, Inc. | Authenticated (Batch 5D); used to publish the remote (repository later switched to public in Batch 5H) |
 | Sysinternals Suite | 2026.8.1.0 | Microsoft Store `9P7KNL5RWT25` | Microsoft Corporation | Store-signed; tools not auto-run |
 
 ## Installed — applications (earlier batches)
@@ -36,15 +36,15 @@ Sourcing rules:
 | OneDrive | 4 | OS / already current | Unchanged |
 | ChatGPT Desktop | 4D | Microsoft Store (OpenAI) | Login held for user |
 | Claude Desktop | 4D | winget `Anthropic.Claude` | Login held for user |
-| Google Chrome | 4D | winget `Google.Chrome` (64-bit) | Clean profile; sign-in optional |
+| Google Chrome | 4D | winget `Google.Chrome` (64-bit) | Two profiles (`Personal-Study`, `Work-CyberOps`), operationally separated |
+| Epson WF-2950 printer software | later | official Epson | Driver + Epson Scan 2; print and scan verified operational |
+| Cisco Packet Tracer | later | official (Cisco Networking Academy) | Network-lab / study use |
 
 ## Held / pending (require separate authorization or a precondition)
 
 | Software | Blocker |
 |---|---|
 | Microsoft Office | Institutional portal sign-in required (interactive) |
-| Epson WF-2950 printer software | Printer not yet connected (Batch 4C) |
-| Public GitHub release | Repository is published but **private**; switching to public is a separate future decision |
 | Python third-party packages | Deliberately deferred; install per-project in a venv when needed |
 
 ## Candidate future tooling (not yet authorized)

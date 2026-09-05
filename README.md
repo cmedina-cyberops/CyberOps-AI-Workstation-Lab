@@ -19,7 +19,7 @@ professional employment, client engagements, or any organization's systems.
 - Treat partitions, firmware, Secure Boot, TPM, BitLocker, the bootloader, and
   Defender / firewall architecture as change-controlled — never modified automatically.
 - Produce readable, reusable automation (PowerShell / Python / Bash) and sanitized
-  technical reports suitable for a future public portfolio.
+  technical documentation suitable for a public, curated portfolio.
 - Practice disciplined recovery planning: tested recovery media, verified images before
   any high-risk work.
 
@@ -32,7 +32,7 @@ professional employment, client engagements, or any organization's systems.
 | Boot | UEFI / GPT dual boot; Kali selectable at the boot menu |
 | Firmware | UEFI; Secure Boot currently disabled for Kali boot compatibility (change-controlled) |
 | Workspace | Visual Studio Code as the engineering workspace |
-| Source of truth | Git + a private GitHub repository for sanitized code and documentation |
+| Source of truth | Git + a public, sanitized GitHub repository for curated code and documentation |
 | AI assistance | LLM assistants used as planning / review aids; every change is human-authorized before execution |
 
 ## Security Approach
@@ -62,10 +62,15 @@ Summary as of the latest batch — full detail in `PROJECT_STATE.md`:
   profiles.
 - Windows recovery USB created and boot-tested.
 - Security-hardening batch: **PASS**. Engineering-baseline batch: **PASS**.
+- Personal-data recovery review complete; unwanted install-media / cracked-software
+  artifacts isolated and disposed of; personal documents left untouched.
+- Cybersecurity lab stood up under Hyper-V (isolated Kali VM, NAT and private lab
+  switches, reversible baseline checkpoints). Epson WF-2950 print/scan and Cisco Packet
+  Tracer added to the workstation toolset.
 - Firmware update + Secure Boot re-enablement: **HOLD** (high-risk, backup required).
-- Personal-data recovery review: **HOLD** pending a cloud copy completing.
-- This repository is published as a **private** GitHub repository and is being prepared
-  for possible future public portfolio use.
+- This repository is a **public**, sanitized technical portfolio. Public evidence is
+  curated and privacy-reviewed; internal / raw batch reports and machine-local state
+  remain local and are excluded from version control.
 
 ## Tooling
 
@@ -73,7 +78,7 @@ Summary as of the latest batch — full detail in `PROJECT_STATE.md`:
 |---|---|
 | Shell / automation | Windows PowerShell 5.1 and PowerShell 7 (side by side), Bash (Kali) |
 | Languages | PowerShell, Python 3.13, Bash |
-| Version control | Git, GitHub CLI, GitHub (private remote) |
+| Version control | Git, GitHub CLI, GitHub (public remote) |
 | Editor | Visual Studio Code |
 | Diagnostics | Sysinternals Suite (official Microsoft source), built-in Windows tooling |
 | Sourcing rule | Official vendor sources / Microsoft Store / trusted winget packages; installer hash verification is never bypassed; no cracked or optimizer software |
@@ -97,10 +102,22 @@ Exact versions, publishers, and signatures are recorded in `SOFTWARE_PLAN.md` an
 | `RECOVERY_MEDIA_INVENTORY.md` | Recovery media tracking (sanitized) |
 | `BATCH_*_RESULTS.md` | Per-batch execution records: pre-check, commands, results, verification, verdict |
 
-Language directories currently hold `.gitkeep` placeholders; automation is added as
-batches produce it. Some internal working files (the AI-assistant operating agreement
-and workflow / publication logs) are kept local to the machine and are intentionally not
-part of this repository.
+Language directories hold `.gitkeep` placeholders and gain automation as batches produce
+it. Internal working files — the AI-assistant operating agreement, the raw per-batch
+execution logs, the local organizational manual, and machine / hardware reports — are
+kept local to the machine and are intentionally excluded from this repository.
+
+## Automation
+
+- `powershell/Backup-BraveBookmarks.ps1`
+  - bookmarks-only backup of the Brave browser
+  - discovers Brave profiles automatically
+  - copies only `Bookmarks` / `Bookmarks.bak`, then verifies each copy by size and SHA256
+  - writes to a parameterised destination (defaults to the current Google Drive account's
+    `My Drive\Backups\Brave`), in timestamped folders, with no automatic deletion
+  - deliberately excludes passwords, cookies, history, sessions, tokens, and other
+    sensitive browser data; does not close Brave; contains no restore path
+  - PowerShell 7 (also runs on Windows PowerShell 5.1); no administrator rights required
 
 ## Key Accomplishments
 
@@ -116,20 +133,24 @@ part of this repository.
   verification.
 - Engineering baseline standardized (PowerShell 7, Python 3.13, Git, GitHub CLI,
   Sysinternals) with versions and sources recorded.
-- Repository sanitized, privacy-reviewed, committed, and published to a private GitHub
-  remote.
+- Repository sanitized, privacy-reviewed, and published as a **public**, curated
+  portfolio; internal / raw batch reports and machine-local state kept local and
+  git-excluded.
+- Isolated Hyper-V cybersecurity lab established: single Kali VM, NAT + private lab
+  switches with no bridge to the home LAN, and reversible baseline checkpoints.
+- First reusable automation added: `powershell/Backup-BraveBookmarks.ps1`
+  (bookmarks-only, hash-verified backup; no browser secrets touched).
 
 ## Planned Work
 
 - **Firmware / Secure Boot (HOLD):** vendor BIOS update and Secure Boot re-enablement
   with matching Kali boot reconfiguration — only after a verified full system image.
-- **Personal-data recovery review (HOLD):** selective recovery once the cloud copy
-  completes.
 - Move the 9 ASR rules from Audit to Block after reviewing impact.
 - Rebuild and boot-test the Kali installer USB.
-- Add automation to `powershell/`, `python/`, and `bash/` (e.g. a security-baseline
+- Build the first isolated target VM for the lab; add a Windows test VM later.
+- Add more automation to `powershell/`, `python/`, and `bash/` (e.g. a security-baseline
   auditor, system inventory, network diagnostics).
-- Decide on a `LICENSE` before any public release.
+- GitHub repository metadata / hygiene review.
 
 ## Safety / Ethics
 
@@ -154,6 +175,6 @@ part of this repository.
 
 ## License
 
-No license granted yet. Until a `LICENSE` file is added, all rights reserved by the
-author for the custom scripts and documentation. Third-party tools referenced here remain
-under their own licenses.
+Released under the [MIT License](LICENSE) — the custom scripts and documentation in this
+repository may be reused under those terms. Third-party tools referenced here remain under
+their own licenses.

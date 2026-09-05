@@ -8,6 +8,71 @@ This project does not yet use semantic version tags; entries are grouped by batc
 
 ---
 
+## 2026-09-05 – Add MIT license + first public automation
+
+### Added
+- `LICENSE` — MIT License (copyright holder `cmedina-cyberops`). The custom scripts and
+  documentation in this repository are now reusable under MIT terms.
+- `powershell/Backup-BraveBookmarks.ps1` published as the first reusable public script,
+  with an **Automation** section in `README.md` describing it.
+
+### Notes
+- Published the refreshed documentation (`README.md`, `PROJECT_STATE.md`, `CHANGELOG.md`,
+  `SOFTWARE_PLAN.md`, `.gitignore`) to the public repository.
+- No internal / raw batch report, the local organizational manual, or any machine-local
+  state was published; those remain git-excluded.
+- Repository unchanged otherwise: still public, default branch `main`, no Issues /
+  Projects / Wiki / Discussions / Pages / Actions / branch protection.
+
+---
+
+## 2026-09-05 – Workstation organization + documentation refresh
+
+### Changed
+- Completed Chrome profile separation into two primary profiles, **Personal-Study** and
+  **Work-CyberOps**, operationally separated.
+- Added a bookmarks-only Google Drive backup automation for Brave
+  (`powershell/Backup-BraveBookmarks.ps1`); first run **PASS**. Bookmark files only — no
+  passwords, cookies, history, sessions, or tokens.
+- Verified Claude Code CLI at installed version 2.1.258 (`winget` reports no newer
+  version available).
+- Refreshed the project documentation (`README.md`, `PROJECT_STATE.md`, this changelog,
+  and the local `docs/ORGANIZACION_DIGITAL.md`) to match the current workstation and lab
+  state.
+
+### Notes
+- Documented that the GitHub repository is now **public** (sanitized, curated portfolio;
+  switched from private in Batch 5H). Internal / raw batch reports and machine-local
+  state remain local and git-excluded.
+- `docs/ORGANIZACION_DIGITAL.md` remains local / private (untracked).
+
+---
+
+## 2026-09-04 – Printing + network-lab tooling
+
+### Added
+- Epson WF-2950 print + scan set up and verified operational (driver + Epson Scan 2).
+- Cisco Packet Tracer added to the workstation toolset for network-lab / study use.
+
+---
+
+## 2026-09-03 – Kali lab: persistent isolated networking + checkpoints
+
+### Changed
+- Completed the Hyper-V Kali-Lab baseline: the VM now holds a persistent `Lab-NAT`
+  address, with `Lab-Isolated` reserved and fully isolated (no Internet, no bridge to the
+  home LAN).
+- Created reversible baseline checkpoints (`Baseline-Clean`, `Baseline-Networked`); no
+  `apt upgrade` and no offensive tooling installed.
+- Cleaned up verified-redundant Kali source / installer files on the host (safe disk
+  cleanup; provenance material retained).
+
+### Notes
+- No change to Secure Boot, firmware, partitions, the bootloader, host networking to the
+  home LAN, or the Windows security baseline.
+
+---
+
 ## [Batch 5F] – 2026-08-30 – Final public-readiness review
 
 ### Changed
